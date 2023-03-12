@@ -8,7 +8,6 @@ const Login = () => {
 
   const [inputs, setInputs] = useState({
     username: "",
-    email: "",
     password: "",
   });
 
@@ -36,7 +35,7 @@ const Login = () => {
       <form>
         <input type="text" placeholder="username" name="username" onChange={handleChange}/>
         <input type="password" placeholder="password" name="password" onChange={handleChange} />
-        <button onSubmit={handleSubmit}>Login</button>
+        <button  onClick={handleSubmit}>Login</button>
         {err && <p>{err}</p>}
         <span>
           No account? <Link to="/register">Register</Link>

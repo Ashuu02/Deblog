@@ -1,6 +1,8 @@
 import { db } from "../db.js";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { compareSync, hashSync, genSaltSync } from "bcrypt";
+
 
 //REGISTER
 
@@ -34,10 +36,13 @@ export const register = (req, res) => {
 export const login = (req, res) => {
   //CHECK USER
 
+  console.log(req.body)
+  console.log("first")
+
   const q = "SELECT * FROM users WHERE username=?";
 
   db.query(q, [req.body.username], (err, data) => {
-    if (err) return res.json(err);
+    if (err) return res.status(500).json(err);
     if (data.length === 0) return res.status(404).json("User not found!");
 
     //CHECK PASSWORD
@@ -60,5 +65,6 @@ export const login = (req, res) => {
       .json(other);
   });
 };
+
 
 export const logout = (req, res) => {};
