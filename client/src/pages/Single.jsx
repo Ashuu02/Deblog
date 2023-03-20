@@ -119,6 +119,13 @@ const Single = () => {
   //   return doc.body.textContent
   // }
 
+
+  const getText = (html) =>{
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    return doc.body.textContent
+  }
+
+
   return (
     <div className="single">
       <div className="content">
@@ -147,6 +154,8 @@ const Single = () => {
             __html: DOMPurify.sanitize(post.desc),
           }}
         ></p>       */}
+
+        {getText(post.desc)}
         </div>
       <Menu cat={post.cat}/>
     </div>

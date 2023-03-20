@@ -13,6 +13,8 @@ import Write from "./pages/Write";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import './style.scss'
+import BWrite from "./pages/BWrite";
+import Deblogs from "./pages/DeBlogs";
 
 
 const Layout = () => {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: "/write",
         element: <Write/>,
+      },
+      {
+        path: "/bwrite",
+        element: <BWrite/>,
+      },
+      {
+        path: "/deblogs",
+        element: <Deblogs/>,
       },
     ],
   },
