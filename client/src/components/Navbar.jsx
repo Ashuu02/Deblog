@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo from "../img/logo.png";
@@ -8,6 +8,16 @@ const Navbar = () => {
 
   const deBlogs = async () => {};
 
+  const [account, setAccount] = useState(null)
+
+  const connectWallet = async() =>{
+    window.ethereum.request( {method: "eth_requestAccounts"})
+    .then((accounts) => {
+      setAccount(accounts[0]);
+    }).catch( (e) => {
+      alert(e)
+    })
+}
 
   return (
     <div className="navbar">
@@ -19,7 +29,7 @@ const Navbar = () => {
         </div>
         <div className="links">
           <Link className="link" to="/deblogs">
-            <button>Get Decentralized Blogs</button>
+            <button onClick={connectWallet}>Get Decentralized Blogs</button>
           </Link>
           <Link className="link" to="/?cat=art">
             <h6>ART</h6>
@@ -27,8 +37,8 @@ const Navbar = () => {
           <Link className="link" to="/?cat=science">
             <h6>SCIENCE</h6>
           </Link>
-          <Link className="link" to="/?cat=technology">
-            <h6>TECHNOLOGY</h6>
+          <Link className="link" to="/?cat=animals">
+            <h6>ANIMALS</h6>
           </Link>
           <Link className="link" to="/?cat=cinema">
             <h6>CINEMA</h6>

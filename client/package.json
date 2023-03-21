@@ -16,7 +16,9 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "sass": "^1.58.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@pushprotocol/restapi": "^0.2.1",
+    "@pushprotocol/uiweb": "^0.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

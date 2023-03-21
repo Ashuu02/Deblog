@@ -278,7 +278,7 @@ const API_KEY =
             {/* <b>Status: </b> Draft */}
           </span>
           <span>
-            {/* <b>Visibility: </b> Public */}
+            <b>Blog in Decentralized manner</b> 
           </span>
           <input
             style={{ display: "none" }}
@@ -293,10 +293,10 @@ const API_KEY =
           <input className='fileUpload' type="file" id='chooseFile' onChange={handleFileUpload}/>
           <div className="buttons">
             {/* <button>Save as a draft</button> */}
-            <button onClick={connectWallet}>Connect</button>
+            <button onClick={connectWallet}>Connect Metamask</button>
             {/* <button onClick={handleClick}>Publish</button> */}
             <button onClick={submitProjectFun}>Submit Blog</button>
-            <button onClick={getData}>Get Data</button>
+            {/* <button onClick={getData}>Get Data</button> */}
           </div>
         </div>
         <div className="item">

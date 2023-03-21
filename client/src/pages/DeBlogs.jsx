@@ -5,162 +5,184 @@ import { Link, useLocation } from "react-router-dom";
 
 const Deblogs = () => {
   const [posts, setPosts] = useState([]);
-  
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
+
+  const [postUrls, setPostUrls] = useState([
+    // 'https://ipfs.io/ipfs/bafyreighds737svatvsurruikdo543ey4ordmtvee4p5gtiwpqmfbotmia/metadata.json',
+    // 'https://ipfs.io/ipfs/bafyreigk2axyql75m7hog5nlr5sfv5hxidyme7hs6ufkgjz3e3msh4qwfm/metadata.json',
+    // 'https://ipfs.io/ipfs/bafyreiel737hqefklxmjecbvsxrcc6u7mfvzji37crf23pw5spcfc6zmce/metadata.json'
+  ]);
 
   let contractABI = [
     {
-      "inputs": [
+      inputs: [
         {
-          "internalType": "string",
-          "name": "_url",
-          "type": "string"
+          internalType: "string",
+          name: "_url",
+          type: "string",
         },
         {
-          "internalType": "string",
-          "name": "_tags",
-          "type": "string"
-        }
+          internalType: "string",
+          name: "_tags",
+          type: "string",
+        },
       ],
-      "name": "createBlog",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      name: "createBlog",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
-      "inputs": [
+      inputs: [
         {
-          "internalType": "string",
-          "name": "_url",
-          "type": "string"
+          internalType: "string",
+          name: "_url",
+          type: "string",
         },
         {
-          "internalType": "string",
-          "name": "_tags",
-          "type": "string"
+          internalType: "string",
+          name: "_tags",
+          type: "string",
         },
         {
-          "internalType": "uint256",
-          "name": "_blogCounter",
-          "type": "uint256"
-        }
+          internalType: "uint256",
+          name: "_blogCounter",
+          type: "uint256",
+        },
       ],
-      "name": "deleteBlog",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      name: "deleteBlog",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
-      "inputs": [
+      inputs: [
         {
-          "internalType": "string",
-          "name": "_url",
-          "type": "string"
+          internalType: "string",
+          name: "_url",
+          type: "string",
         },
         {
-          "internalType": "string",
-          "name": "_tags",
-          "type": "string"
+          internalType: "string",
+          name: "_tags",
+          type: "string",
         },
         {
-          "internalType": "uint256",
-          "name": "_blogCounter",
-          "type": "uint256"
-        }
+          internalType: "uint256",
+          name: "_blogCounter",
+          type: "uint256",
+        },
       ],
-      "name": "updateBlog",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      name: "updateBlog",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
     },
     {
-      "inputs": [
+      inputs: [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
       ],
-      "name": "availableBlogs",
-      "outputs": [
+      name: "availableBlogs",
+      outputs: [
         {
-          "internalType": "uint256",
-          "name": "blogId",
-          "type": "uint256"
+          internalType: "uint256",
+          name: "blogId",
+          type: "uint256",
         },
         {
-          "internalType": "string",
-          "name": "blogUrl",
-          "type": "string"
+          internalType: "string",
+          name: "blogUrl",
+          type: "string",
         },
         {
-          "internalType": "address",
-          "name": "blogOwner",
-          "type": "address"
+          internalType: "address",
+          name: "blogOwner",
+          type: "address",
         },
         {
-          "internalType": "string",
-          "name": "tags",
-          "type": "string"
-        }
+          internalType: "string",
+          name: "tags",
+          type: "string",
+        },
       ],
-      "stateMutability": "view",
-      "type": "function"
+      stateMutability: "view",
+      type: "function",
     },
     {
-      "inputs": [],
-      "name": "blogCounter",
-      "outputs": [
+      inputs: [],
+      name: "blogCounter",
+      outputs: [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
+          internalType: "uint256",
+          name: "",
+          type: "uint256",
+        },
       ],
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ]
+      stateMutability: "view",
+      type: "function",
+    },
+  ];
 
-
-  let contractAddress= '0x8E44a3f0A34a588b7c8Dfd21DfBB4A617a4C396C'
+  let contractAddress = "0x8E44a3f0A34a588b7c8Dfd21DfBB4A617a4C396C";
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-  const getData = async() => {
-    const contractInstance = new ethers.Contract(contractAddress, contractABI, provider);
-
-    let blogCount = await contractInstance.blogCounter() 
-    console.log(blogCount.toString());
-    for(let i = 0; i <= blogCount.toString(); i ++){
-
-      let data = await contractInstance.availableBlogs(i)
-      console.log(data[1]) 
-    }
-  }
-
   useEffect(() => {
     getData();
-  },[])
-  
+  }, []);
 
-  const cat = useLocation().search;
+  // const provider2 = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/polygon_mumbai");
+  // const provider2 = new ethers.providers.JsonRpcProvider("https://polygon-testnet.public.blastapi.io");
+  // const provider2 = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com	");
 
-  console.log(cat);
+
+  const getData = async () => {
+    const contractInstance = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      // provider2
+      provider
+    );
+
+    // let arr=[]
+    let blogCount = await contractInstance.blogCounter();
+    console.log(blogCount.toString());
+    const newUrls = [];
+    for (let i = 0; i <= blogCount.toString(); i++) {
+      let data = await contractInstance.availableBlogs(i);
+      console.log(data[1]);
+      let editedStr = data[1].slice(7);
+      newUrls.push(`https://ipfs.io/ipfs/${editedStr}`);
+
+      setPostUrls(newUrls);
+      console.log(postUrls);
+      // console.log(`https://ipfs.io/ipfs/${editedStr}`)
+    }
+  };
+
+  const newPosts = [];
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`/posts${cat}`);
-        setPosts(res.data);
-      } catch (err) {
-        console.log(err);
+    const fetchPosts = async () => {
+      for (let i = 0; i < postUrls.length; i++) {
+        const response = await fetch(postUrls[i]);
+        const json = await response.json();
+        newPosts.push(json);
       }
+
+      setPosts(newPosts);
     };
-    fetchData();
-  }, [cat]);
 
-
-  // for(let i=0;i<=)
+    fetchPosts();
+    // getData();
+  }, [newPosts]);
 
   // const posts = [
   //     {
@@ -189,25 +211,42 @@ const Deblogs = () => {
   //     },
   //   ];
 
-  const getText = (html) =>{
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  };
 
   return (
     <div className="home">
       <div className="posts">
         {posts.map((post) => (
-          <div className="post" key={post.id}>
+          // <div className="post" key={post.id}>
+          <div className="post">
             <div className="img">
-              <img src={`../upload/${post.img}`} alt="" />
+              <img src={`https://ipfs.io/ipfs/${post.image.slice(7)}`} alt="" />
             </div>
             <div className="content">
-              <Link to={`/post/${post.id}`}>
-                <h1>{post.title}</h1>
-              </Link>
-              <p>{getText(post.desc)}</p>
-              <button>Read More</button>
+              {/* <Link to={`/post/${post.id}`}> */}
+              <h1>{post.name}</h1>
+              <p>
+                {isReadMore
+                  ? getText(`${post.description}`).slice(0, 200)
+                  : getText(`${post.description}`)}
+
+                <span
+                  onClick={toggleReadMore}
+                  style={{ color: "rgb(192,192,192)", cursor: "pointer" }}
+                >
+                  {isReadMore ? "..." : ""}
+                </span>
+              </p>
+              <button
+                onClick={toggleReadMore}
+                // style={{ color: "rgb(192,192,192)", cursor: "pointer" }}
+              >
+                {isReadMore ? "...Read more" : " Show less"}
+              </button>
+              {/* </Link> */}
             </div>
           </div>
         ))}

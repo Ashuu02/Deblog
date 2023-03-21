@@ -5,6 +5,11 @@ import { Link, useLocation } from "react-router-dom";
 const Home = () => {
   const [posts, setPosts] = useState([]);
 
+  const [isReadMore, setIsReadMore] = useState(true);
+  const toggleReadMore = () => {
+    setIsReadMore(!isReadMore);
+  };
+
   const cat = useLocation().search;
 
   console.log(cat);
@@ -48,11 +53,13 @@ const Home = () => {
   //     },
   //   ];
 
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  };
 
-  const getText = (html) =>{
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
+
+
 
   return (
     <div className="home">
@@ -66,8 +73,10 @@ const Home = () => {
               <Link to={`/post/${post.id}`}>
                 <h1>{post.title}</h1>
               </Link>
-              <p>{getText(post.desc)}</p>
-              <button>Read More</button>
+              <p>{getText(post.desc).slice(0, 500)}</p>
+              <Link to={`/post/${post.id}`}>
+                <button>Read More</button>
+              </Link>
             </div>
           </div>
         ))}
@@ -75,5 +84,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;
