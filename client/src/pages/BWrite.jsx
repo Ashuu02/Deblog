@@ -136,6 +136,7 @@ const BWrite = () => {
   ]
 
   let contractAddress= '0x8E44a3f0A34a588b7c8Dfd21DfBB4A617a4C396C'
+  // let contractAddress= '0x055B6FF659Ea52f5d99fcc7A9827d7f2DCC39372'
   console.log(value);
 
   const navigate = useNavigate()

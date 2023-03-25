@@ -1,3 +1,4 @@
+import { Chat } from "@pushprotocol/uiweb";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -81,6 +82,7 @@ const Home = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };

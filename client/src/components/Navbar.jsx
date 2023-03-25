@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo from "../img/logo.png";
 
+
+import * as PushAPI from "@pushprotocol/restapi";
+import { Chat } from "@pushprotocol/uiweb";
+
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext); //updates the navbar with the current user info
-
-  const deBlogs = async () => {};
 
   const [account, setAccount] = useState(null)
 
@@ -31,6 +33,7 @@ const Navbar = () => {
           <Link className="link" to="/deblogs">
             <button onClick={connectWallet}>Get Decentralized Blogs</button>
           </Link>
+          
           <Link className="link" to="/?cat=art">
             <h6>ART</h6>
           </Link>
@@ -69,6 +72,17 @@ const Navbar = () => {
           </span>
         </div>
       </div>
+
+      <Chat                   
+      // style={{ position: "absolute", margin: "5000px", cursor: "pointer" }}
+                    // account={account} //user address 
+                    account= '0x5dA67e37780C77E5cB4565fD4995854153911Df9' //user address 
+                    // supportAddress="0x5dA67e37780C77E5cB4565fD4995854153911Df9" //support address
+                    supportAddress="0xc221979949e0ACc4E1E715FbB232284f7eE412d4" //support address
+                    apiKey="jVPMCRom1B.iDRMswdehJG7NpHDiECIHwYMMv6k2KzkPJscFIDyW8TtSnk4blYnGa8DIkfuacU0"
+                    // apiKey="vzOQa8Hda3.lD6Yvrij1T4qHrE07Mp7XcE3mRWu8Yl6WAmOzLSfI63xWuGSoNkXsHeBDVvG63Hs"
+                        env="staging"
+        />
     </div>
   );
 };
