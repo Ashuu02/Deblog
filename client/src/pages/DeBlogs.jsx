@@ -130,8 +130,8 @@ const Deblogs = () => {
     },
   ];
 
-  let contractAddress = "0x8E44a3f0A34a588b7c8Dfd21DfBB4A617a4C396C";   //polygon
-  // let contractAddress = "0x055B6FF659Ea52f5d99fcc7A9827d7f2DCC39372";       //FVM
+  // let contractAddress = "0x8E44a3f0A34a588b7c8Dfd21DfBB4A617a4C396C";   //polygon
+  let contractAddress = "0x055B6FF659Ea52f5d99fcc7A9827d7f2DCC39372";       //FVM
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
